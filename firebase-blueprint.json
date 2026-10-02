@@ -1,0 +1,95 @@
+{
+  "entities": {
+    "User": {
+      "title": "User",
+      "description": "User profile with role-based access and membership tier",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string" },
+        "email": { "type": "string", "format": "email" },
+        "phone": { "type": "string" },
+        "role": { "type": "string", "enum": ["customer", "admin"] },
+        "licenseNumber": { "type": "string" },
+        "membershipTier": { "type": "string" },
+        "createdAt": { "type": "string" }
+      },
+      "required": ["id", "name", "email", "role"]
+    },
+    "Car": {
+      "title": "Car",
+      "description": "Luxury fleet vehicle catalog entry",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "brandName": { "type": "string" },
+        "model": { "type": "string" },
+        "year": { "type": "number" },
+        "category": { "type": "string" },
+        "dailyPrice": { "type": "number" },
+        "deposit": { "type": "number" },
+        "availability": { "type": "string", "enum": ["Available", "Reserved", "In Maintenance"] },
+        "heroImage": { "type": "string" }
+      },
+      "required": ["id", "brandName", "model", "dailyPrice", "availability"]
+    },
+    "Booking": {
+      "title": "Booking",
+      "description": "Vehicle rental reservation itinerary",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "bookingReference": { "type": "string" },
+        "carId": { "type": "string" },
+        "carName": { "type": "string" },
+        "userId": { "type": "string" },
+        "customerName": { "type": "string" },
+        "customerEmail": { "type": "string" },
+        "customerPhone": { "type": "string" },
+        "pickupLocation": { "type": "string" },
+        "dropoffLocation": { "type": "string" },
+        "pickupDate": { "type": "string" },
+        "returnDate": { "type": "string" },
+        "durationDays": { "type": "number" },
+        "chauffeurOption": { "type": "boolean" },
+        "grandTotal": { "type": "number" },
+        "status": { "type": "string", "enum": ["Pending", "Confirmed", "Active", "Completed", "Cancelled"] },
+        "createdAt": { "type": "string" }
+      },
+      "required": ["id", "bookingReference", "carId", "userId", "pickupDate", "returnDate", "grandTotal", "status"]
+    },
+    "Review": {
+      "title": "Review",
+      "description": "Verified client testimonial",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "carId": { "type": "string" },
+        "carName": { "type": "string" },
+        "customerName": { "type": "string" },
+        "rating": { "type": "number" },
+        "comment": { "type": "string" },
+        "date": { "type": "string" }
+      },
+      "required": ["id", "carId", "customerName", "rating", "comment"]
+    }
+  },
+  "firestore": {
+    "/users/{userId}": {
+      "schema": { "$ref": "#/entities/User" },
+      "description": "Private user account profile and credentials"
+    },
+    "/cars/{carId}": {
+      "schema": { "$ref": "#/entities/Car" },
+      "description": "Global luxury fleet registry"
+    },
+    "/bookings/{bookingId}": {
+      "schema": { "$ref": "#/entities/Booking" },
+      "description": "Client reservation documents and itineraries"
+    },
+    "/reviews/{reviewId}": {
+      "schema": { "$ref": "#/entities/Review" },
+      "description": "Public customer feedback and testimonials"
+    }
+  }
+}

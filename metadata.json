@@ -1,0 +1,6 @@
+{
+  "name": "EXOTICA Luxury Car Rental",
+  "description": "Drive Beyond Ordinary. The world's finest luxury cars, supercars, and chauffeur mobility at your command.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
